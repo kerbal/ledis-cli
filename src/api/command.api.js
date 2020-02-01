@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { EXE_CMD } from '../config/route';
-import API from '../service/api.service';
 
 const CommandAPI = async (command) => {
   try {
