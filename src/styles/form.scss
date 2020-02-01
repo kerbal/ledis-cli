@@ -1,0 +1,14 @@
+.command-input {
+  background: none;
+  border: none;
+  color: white;
+  height: fit-content;
+}
+
+.command-input:focus {
+  outline: none;
+}
+
+.content {
+  cursor: text;
+}
