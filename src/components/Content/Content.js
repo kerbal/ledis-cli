@@ -27,7 +27,9 @@ const Content = () => {
     else {
       setData([...data, {command, response: {}}]);
     }
-    setHistory([command, ...history]);
+    if(command) {
+      setHistory([command, ...history]);
+    }
   }
 
   return (

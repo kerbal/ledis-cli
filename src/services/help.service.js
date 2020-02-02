@@ -4,7 +4,7 @@ class HelpService {
   static getHelp() {
     const help = [];
     for(const prop in commands) {
-      const command = commands[prop];
+      const command = new commands[prop]();
       help.push({
         args: command.args,
         description: command.description,
