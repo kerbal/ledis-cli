@@ -10,6 +10,8 @@ Simple clone version of Redis-CLI
    2. Screenshots
    3. UI
    4. Functionality
+   5. Some thoughts
+   6. Improvement
 2. Architecture
    1. Architecture
    2. Folder structure
@@ -50,6 +52,18 @@ Simple clone version of Redis-CLI
 - Use up or down arrow key to trace back old entered command
 
 - ...
+
+## 1. 4. Some thoughts
+
+Wow, this is a interesting requirement, app, small app but so many problems. I think some of the most important things to think about are how to organize the code to simply add new data structure or a new command, and how to make the UI similar to the console window. 
+
+So I came with the OOP approach to organize custom command and custom data structure. I try to make the UI as similar as possible to the console window, add command-history, add some colors and a help panel.
+
+## 1. 5. Improvement
+
+- Multiple line command edit (currently single line input command).
+- Improve this README file.
+- 
 
 # 2. Architecture (about the code)
 
