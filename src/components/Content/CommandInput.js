@@ -3,26 +3,46 @@ import React, { useEffect, useState } from 'react';
 const CommandInput = (props) => {
   const inputRef = React.createRef();
   const [ isSending, setIsSeding ] = useState(false);
-
-  const enter = async (event) => {
-    if(event.keyCode === 13) {
-      const value = event.target.value.trim();
-      if(value) {
-        setIsSeding(true);
-        await props.sendCommand(event.target.value);
-        setIsSeding(false);
+  let historyIndex = -1;
+  
+  const onKeyDown = async (event) => {
+    const keyCode = event.keyCode;
+    const { value } = event.target;
+    const { history } = props;
+    if(keyCode === 13) {
+      setIsSeding(true);
+      await props.sendCommand(value);
+      setIsSeding(false);
+    }
+    else if(keyCode === 38) {
+      if(historyIndex + 1 < history.length) {
+        historyIndex++;
+        event.target.value = history[historyIndex];
       }
+    }
+    else if(keyCode === 40) {
+      if(historyIndex - 1 >= 0) {
+        historyIndex--;
+        event.target.value = history[historyIndex];
+      }
+      else if(historyIndex - 1 === -1) {
+        historyIndex--;
+        event.target.value = '';
+      }
+    }
+    else {
+      historyIndex = -1;
     }
   }
 
   const focus = () => {
-    inputRef.current.value = "";
     inputRef.current.focus();
   }
 
   useEffect(() => {
+    inputRef.current.value = "";
     focus();
-  })
+  });
 
   return (
     <div>
@@ -31,7 +51,7 @@ const CommandInput = (props) => {
         <input
           type="text"
           ref={inputRef}
-          onKeyDown={enter}
+          onKeyDown={onKeyDown}
           className="command-input flex-grow-1"
           onBlur={focus}
           readOnly={isSending}
@@ -39,7 +59,7 @@ const CommandInput = (props) => {
       </div>
       {
         isSending && 
-        <div>...</div>
+        <div>......</div>
       }
     </div>
   )
