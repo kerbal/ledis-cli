@@ -28,7 +28,6 @@ const Content = () => {
       setData([...data, {command, response: {}}]);
     }
     setHistory([command, ...history]);
-    animateScroll.scrollToBottom({containerId: 'content', smooth: false, duration: 0});
   }
 
   return (

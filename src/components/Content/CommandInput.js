@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { animateScroll } from 'react-scroll';
 
 const CommandInput = (props) => {
   const inputRef = React.createRef();
@@ -39,6 +40,7 @@ const CommandInput = (props) => {
   useEffect(() => {
     inputRef.current.value = "";
     focus();
+    animateScroll.scrollToBottom({containerId: 'content', smooth: false, duration: 0});
   });
 
   return (

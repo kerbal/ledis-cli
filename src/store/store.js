@@ -1,29 +1,28 @@
 import LocalStorageService from "../services/localStorage.service";
+import datatypes from "../data types";
 
 class Store {
   constructor() {
     this.map = new Map();
   }
 
-  set(key, value, type) {
-    this.map.set(key, {
-      value,
-      type,
-      expire: {
-        time: -1,
-        trigger: undefined
-      }
-    });
+  set(key, value) {
+    this.map.set(key, value);
   }
 
   get(key, type) {
     const data = this.map.get(key);
     if(data) {
-      if(data.type === type) {
-        return data.value;
+      if(type) {
+        if(data.type === type) {
+          return data;
+        }
+        else {
+          throw new Error('WRONGTYPE Operation against a key holding the wrong kind of value');
+        }
       }
       else {
-        throw new Error('WRONGTYPE Operation against a key holding the wrong kind of value');
+        return data;
       }
     }
     else {
@@ -51,65 +50,29 @@ class Store {
     return this.map.has(key);
   }
 
-  expire(key, time) {
-    const data = this.map.get(key);
-    if(data) {
-      clearTimeout(data.expire.trigger);
-      data.expire = {
-        time: new Date().getTime() + time * 1000,
-        trigger: setTimeout(() => {
-          store.delete(key);
-        }, Math.max(time * 1000, 0))
-      }
-      return 1;
-    }
-    else {
-      return 0;
-    }
-  }
-
-  getTimeout(key) {
-    const data = this.map.get(key);
-    if(data) {
-      if(data.expire.time >= 0) {
-        return Number.parseInt((data.expire.time - new Date().getTime()) / 1000);
-      }
-      else {
-        return -1;
-      }
-    }
-    else {
-      return -2;
-    }
-  }
-
   save() {
     const tmp = new Array(...this.map);
-    const data = tmp.map(d => {
-      if(d[1].type === 'set') {
-        d[1].value = Array.from(d[1].value);
-      }
-      d[1].expire.trigger = undefined;
-      return d;
+    const data = tmp.map(([key, d]) => {
+      d.serialize();
+      return [key, d];
     });
-    LocalStorageService.write('ledis-snapshot', data);
+    LocalStorageService.write('ledis-snapshot-test', data);
   }
 
-  async restore() {
+  restore() {
     const tmp = LocalStorageService.read('ledis-snapshot');
     if(tmp) {
-      const data = tmp.map(d => {
-        if(d[1].type === 'set') {
-          d[1].value = new Set(d[1].value);
+      tmp.forEach(t => {
+        const key = t[0];
+        const raw = t[1];
+        
+        const d = new datatypes[raw.type]();
+        d.deserialize(raw);
+        if(d.expire.time >= 0) {
+          d.setExpire(Math.max(0, d.getTimeout() * 1000), () => this.delete(key));
         }
-        if(d[1].expire.time >= 0) {
-          d[1].expire.trigger = setTimeout(() => {
-            store.delete(d[0]);
-          }, Math.max(Number.parseInt((d[1].expire.time - new Date().getTime())), 0))
-        }
-        return d;
+        this.map.set(key, d);
       });
-      this.map = new Map(data);
     }
   }
 }

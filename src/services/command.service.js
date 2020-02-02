@@ -8,7 +8,7 @@ class CommandService {
       const c = parsed[0].toUpperCase();
       const args = parsed.slice(1, parsed.length);
       if(commands.hasOwnProperty(c)) {
-        const response = commands[c].execute(args);
+        const response = new commands[c]().execute(args);
         return ({
           success: true,
           ...response

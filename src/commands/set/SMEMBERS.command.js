@@ -16,14 +16,14 @@ class SMEMBERS extends Command {
   execute(args = []) {
     args = this.parse(args);
     const data = store.get(args.key, 'set');
-    if(data === undefined || data.size === 0) {
+    if(data === undefined || data.value.size === 0) {
       return ({
         message: '(empty list or set)'
       });
     }
     else {
       return ({
-        value: Array.from(data)
+        value: data.get()
       });
     }
   }

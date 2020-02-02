@@ -19,18 +19,17 @@ class SREMOVE extends Command {
   execute(args = []) {
     args = this.parse(args);
     const data = store.get(args.key, 'set');
-    let count = 0;
     if(data !== undefined) {
-      args.values.forEach(value => {
-        if(data.delete(value)) {
-          count++;
-        }
-      });
+      const count = data.remove(args.values);
+      return ({
+        value: count
+      }); 
     }
-    
-    return ({
-      value: count
-    });
+    else {
+      return ({
+        value: 0
+      }); 
+    }
   }
 }
 

@@ -15,8 +15,16 @@ class TTL extends Command {
 
   execute(args = []) {
     args = this.parse(args);
+    const data = store.get(args.key);
+    let result;
+    if(data) {
+      result = data.getTimeout();
+    }
+    else {
+      result = -2;
+    }
     return ({
-      value: store.getTimeout(args.key)
+      value: result
     });
   }
 }

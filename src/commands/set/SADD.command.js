@@ -1,5 +1,6 @@
 import Command from "../DEFAULT.command";
 import store from "../../store/store";
+import LedisSet from "../../data types/LedisSet";
 
 class SADD extends Command {
   constructor() {
@@ -21,17 +22,11 @@ class SADD extends Command {
     let data = store.get(args.key, 'set');
 
     if(data === undefined) {
-      data = new Set();
+      data = new LedisSet();
       store.set(args.key, data, 'set');
     }
 
-    let count = 0;
-    args.values.forEach(value => {
-      if(!data.has(value)) {
-        data.add(value);
-        count++;
-      }
-    });
+    const count = data.add(args.values);
 
     return ({
       value: count

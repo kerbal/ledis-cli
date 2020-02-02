@@ -14,20 +14,20 @@ import PING from "./data interaction/PING.command";
 import FLUSHALL from "./data interaction/FLUSHALL.command";
 
 const commands = {
-  'PING': new PING(),
-  'SET': new SET(),
-  'GET': new GET(),
-  'SADD': new SADD(),
-  'SMEMBERS': new SMEMBERS(),
-  'SREM': new SREMOVE(),
-  'SINTER': new SINTER(),
-  'KEYS': new KEYS(),
-  'DEL': new DEL(),
-  'EXPIRE': new EXPIRE(),
-  'TTL': new TTL(),
-  'SAVE': new SAVE(),
-  'RESTORE': new RESTORE(),
-  'FLUSHALL': new FLUSHALL()
+  'PING': PING,
+  'SET': SET,
+  'GET': GET,
+  'SADD': SADD,
+  'SMEMBERS': SMEMBERS,
+  'SREM': SREMOVE,
+  'SINTER': SINTER,
+  'KEYS': KEYS,
+  'DEL': DEL,
+  'EXPIRE': EXPIRE,
+  'TTL': TTL,
+  'SAVE': SAVE,
+  'RESTORE': RESTORE,
+  'FLUSHALL': FLUSHALL
 };
 
 export default commands;

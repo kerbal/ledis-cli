@@ -17,7 +17,7 @@ class GET extends Command {
     args = this.parse(args);
     let result;
     if(store.has(args.key)) {
-      result = store.get(args.key, 'string');
+      result = store.get(args.key, 'string').value;
     }
     else {
       result = null;

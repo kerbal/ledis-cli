@@ -18,9 +18,16 @@ class EXPIRE extends Command {
 
   execute(args = []) {
     args = this.parse(args);
+    const data = store.get(args.key);
+    if(data) {
+      data.setExpire(args.time, () => store.delete(args.key));
+      return ({
+        value: 1
+      })
+    }
     return ({
-      value: store.expire(args.key, args.time)
-    })
+      value: 0
+    });
   }
 }
 

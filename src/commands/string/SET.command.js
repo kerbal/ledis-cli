@@ -1,5 +1,6 @@
 import Command from "../DEFAULT.command";
 import store from "../../store/store";
+import LedisString from "../../data types/LedisString";
 
 class SET extends Command {
   constructor() {
@@ -18,7 +19,7 @@ class SET extends Command {
 
   execute(args = []) {
     args = this.parse(args);
-    store.set(args.key, args.value, 'string');
+    store.set(args.key, new LedisString(args.value));
     return ({
       message: 'OK'
     });
