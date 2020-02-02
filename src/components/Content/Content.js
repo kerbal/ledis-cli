@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Line from './Line';
-import CommandAPI from '../../api/command.api';
 import CommandInput from './CommandInput';
 import { animateScroll } from 'react-scroll';
 import { HelpContext } from '../../contexts/help.context';
+import CommandService from '../../services/command.service';
 
 const Content = () => {
   const [ data, setData ] = useState([]);
   const [ history, setHistory ] = useState([]);
   const { setShow } = useContext(HelpContext);
 
-  const sendCommand = async (command) => {
+  const sendCommand = (command) => {
     if(command.toUpperCase() === 'CLEAR') {
       setData([]);
     }
@@ -18,7 +18,7 @@ const Content = () => {
       setShow(true);
     }
     else if(command) {
-      const response = await CommandAPI(command);
+      const response = CommandService.execute(command);
       setData([...data, {
         request: command,
         response

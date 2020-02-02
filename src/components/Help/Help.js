@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { HelpContext } from '../../contexts/help.context';
+import HelpService from '../../services/help.service';
 
 const Help = () => {
-  const { show, helps, setShow }= useContext(HelpContext);
+  const { show, setShow }= useContext(HelpContext);
   if(!show) {
     return <div></div>
   }
+
+  const helps = HelpService.getHelp();
   return (
     <div className="help vh-100 p-3">
       <div className="d-flex justify-content-between">

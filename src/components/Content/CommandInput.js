@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
+import React, { useEffect } from 'react';
 
 const CommandInput = (props) => {
   const inputRef = React.createRef();
-  const [ isSending, setIsSeding ] = useState(false);
   let historyIndex = -1;
   
   const onKeyDown = async (event) => {
@@ -11,9 +9,7 @@ const CommandInput = (props) => {
     const { value } = event.target;
     const { history } = props;
     if(keyCode === 13) {
-      setIsSeding(true);
-      await props.sendCommand(value);
-      setIsSeding(false);
+      props.sendCommand(value);
     }
     else if(keyCode === 38) {
       if(historyIndex + 1 < history.length) {
@@ -55,13 +51,8 @@ const CommandInput = (props) => {
           onKeyDown={onKeyDown}
           className="command-input flex-grow-1"
           onBlur={focus}
-          readOnly={isSending}
         />
       </div>
-      {
-        isSending && 
-        <Loading/>
-      }
     </div>
   )
 }
