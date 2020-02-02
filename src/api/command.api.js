@@ -1,33 +1,19 @@
-import axios from 'axios';
 import { EXE_CMD } from '../config/route';
+import API from './api';
 
 const CommandAPI = async (command) => {
   try {
-    const response = await axios({
+    const data = await new API({
       method: 'GET',
-      url: EXE_CMD + command,
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json'
+      url: EXE_CMD,
+      params: {
+        command
       }
-    });
-    return response.data;
+    }).request();
+    return data;
   }
   catch (error) {
-    if(error.response) {
-      error = error.response;
-    }
-    let message;
-    try {
-      message = error.data.message;
-    }
-    catch (e) {
-      message = error.message;
-    }
-    return ({
-      success: false,
-      message
-    })
+    return API.handleError(error);
   }
 }
 

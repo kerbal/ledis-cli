@@ -1,15 +1,16 @@
-.content::-webkit-scrollbar {
+.help::-webkit-scrollbar, .content::-webkit-scrollbar {
   width: 5px;
 }
-.content::-webkit-scrollbar-track {
+
+.help::-webkit-scrollbar-track, .content::-webkit-scrollbar-track {
   background: #2c3e50; 
 }
 
-.content::-webkit-scrollbar-thumb {
+.help::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb {
   background: #bdc3c7;
   border-radius: 2.5px;
 }
 
-.content::-webkit-scrollbar-thumb:hover {
+.help::-webkit-scrollbar-thumb:hover, .content::-webkit-scrollbar-thumb:hover {
   background: white;
 }

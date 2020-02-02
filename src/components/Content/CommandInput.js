@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 
 const CommandInput = (props) => {
   const inputRef = React.createRef();
@@ -59,7 +60,7 @@ const CommandInput = (props) => {
       </div>
       {
         isSending && 
-        <div>......</div>
+        <Loading/>
       }
     </div>
   )
