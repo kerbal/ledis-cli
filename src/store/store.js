@@ -56,7 +56,7 @@ class Store {
       d.serialize();
       return [key, d];
     });
-    LocalStorageService.write('ledis-snapshot-test', data);
+    LocalStorageService.write('ledis-snapshot', data);
   }
 
   restore() {
@@ -69,7 +69,7 @@ class Store {
         const d = new datatypes[raw.type]();
         d.deserialize(raw);
         if(d.expire.time >= 0) {
-          d.setExpire(Math.max(0, d.getTimeout() * 1000), () => this.delete(key));
+          d.setExpire(Math.max(0, d.getTimeout()), () => this.delete(key));
         }
         this.map.set(key, d);
       });

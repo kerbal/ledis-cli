@@ -3,7 +3,7 @@ class DataType {
     this.value = value;
     this.type = type;
     this.expire = {
-      time: '',
+      time: -1,
       trigger: undefined
     }
   }

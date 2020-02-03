@@ -11,7 +11,8 @@ function App() {
         <div className="d-flex flex-column vh-100 flex-grow-1">
           <Header/>
           <Content/>
-          <div className="text-white text-center">
+
+          <div className="text-white text-center p-2">
             Copyright &copy; {new Date().getFullYear()} Khanh
           </div>
         </div>

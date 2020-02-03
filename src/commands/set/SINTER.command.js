@@ -13,24 +13,14 @@ class SINTER extends Command {
     });
   }
 
-  getCommonElements(a = [], b = []) {
-    a = a.sort((x, y) => x.localeCompare(y));
-    b = b.sort((x, y) => x.localeCompare(y));
+  getCommonElements(a = [], b = new Set()) {
     const common = [];
-    let i = 0, j = 0;
-    while(i < a.length && j < b.length) {
-      if(a[i] === b[j]) {
-        common.push(a[i]);
-        i++;
-        j++;
+    console.log(a, b);
+    a.forEach(value => {
+      if(b.value.has(value)) {
+        common.push(value);
       }
-      else if(a[i] < b[j]) {
-        i++;
-      }
-      else {
-        j++;
-      }
-    }
+    });
     return common;
   }
 
@@ -40,7 +30,7 @@ class SINTER extends Command {
     for(const key of args.keys) {
       const data = store.get(key, 'set');
       if(data !== undefined) {
-        sets.push(Array.from(data));
+        sets.push(data);
       }
       else {
         return ({
@@ -48,7 +38,7 @@ class SINTER extends Command {
         });
       }
     }
-    let common = sets[0];
+    let common = Array.from(sets[0] ? sets[0].value : []);
     for(let i = 1; i < sets.length; i++) {
       common = this.getCommonElements(common, sets[i]);
     }

@@ -5,14 +5,19 @@ Simple clone version of Redis-CLI
 
 ## Outline
 
-1. Description
+1. Setting up
+  - clone this repo
+  - install nodejs, npm, yarn
+  - run "yarn install" to install all the dependencies
+  - run "yarn dev" to start the app locally
+2. Description
    1. About Ledis-CLI
    2. Screenshots
    3. UI
    4. Functionality
    5. Some thoughts
    6. Improvement
-2. Architecture
+3. Architecture
    1. Architecture
    2. Folder structure
    3. The custom data type
