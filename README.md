@@ -12,11 +12,12 @@ Simple clone version of Redis-CLI
   - run "yarn dev" to start the app locally
 2. Description
    1. About Ledis-CLI
-   2. Screenshots
-   3. UI
-   4. Functionality
-   5. Some thoughts
-   6. Improvement
+   2. Demo video
+   3. Screenshots
+   4. UI
+   5. Functionality
+   6. Some thoughts
+   7. Improvement
 3. Architecture
    1. Architecture
    2. Folder structure
@@ -29,13 +30,19 @@ Simple clone version of Redis-CLI
 
 ​	Ledis is a stripped down version of Redis -  a popular in-memory data structure store that is widely used in many applications, either as cache, complex data structure, or store application data itself. Ledis-CLI was build on ReactJS - a popular frontend library, which means it run on web browser, such as Chrome, Firefox,... As a simple clone version of Redis, Ledis can only run some of Redis's commands and support only two data structure, string and set.
 
-## 1. 2. Screenshots
+## 1. 2. Demo video
+
+[Demo video on Youtube](https://youtu.be/0DNNogV2ftY)
+
+
+
+## 1. 3. Screenshots
 
 ![screenshot](https://i.imgur.com/IyVmejL.png)
 
 ![screenshot](https://i.imgur.com/FcSb6HQ.png)
 
-## 1. 3. Functionality
+## 1. 4. Functionality
 
 - Ledis can run all the command required in **the requirement**, plus these commands:
   - PING: check app status, return PONG as success.
@@ -58,13 +65,13 @@ Simple clone version of Redis-CLI
 
 - ...
 
-## 1. 4. Some thoughts
+## 1. 5. Some thoughts
 
 Wow, this is a interesting requirement, app, small app but so many problems. I think some of the most important things to think about are how to organize the code to simply add new data structure or a new command, and how to make the UI similar to the console window. 
 
 So I came with the OOP approach to organize custom command and custom data structure. I try to make the UI as similar as possible to the console window, add command-history, add some colors and a help panel.
 
-## 1. 5. Improvement
+## 1. 6. Improvement
 
 - Multiple line command edit (currently single line input command).
 - Improve this README file.
